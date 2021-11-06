@@ -24,6 +24,21 @@
         }
     }
 
+    public function login($request){
+      
+      $this->query = "SELECT * FROM users WHERE `email`='".$request['email']."' AND `password`='".$request['password']."' LIMIT 1 ";
+      $this->result = mysqli_query($this->connection,$this->query);
+
+      if ($this->result->num_rows) {
+        $_SESSION['user'] = mysqli_fetch_assoc($this->result);
+        header("location:home.php?msg=Logged In Successfully ..!");
+        exit;
+      }else{
+        header("location:index.php?msg=Invalid Email/Password");
+        exit;
+      }
+    }
+
     public function getCaptains(){
       $this->query = "SELECT * FROM users WHERE role_id=2";
 
@@ -57,7 +72,8 @@
         }
       }
 
-      $this->query = "INSERT INTO `users`(`role_id`,`full_name`,`email`,`phone_number`,`cnic`,`password`,`image`,`added_on`) VALUES('2','".$data['full_name']."','".$data['email']."','".$data['phone_number']."','".$data['cnic']."','".$data['password']."','".$FileName."','".date('Y-m-d h:i:s')."') ";
+      $this->query = "INSERT INTO `users`(`role_id`,`full_name`,`email`,`phone_number`,`cnic`,`password`,`image`,`added_on`) 
+      VALUES('2','".$data['full_name']."','".$data['email']."','".$data['phone_number']."','".$data['cnic']."','".hash("md5",$data['password'])."','".$FileName."','".date('Y-m-d h:i:s')."') ";
       
       $this->result = mysqli_query($this->connection,$this->query);
 
@@ -69,5 +85,10 @@
         return false;
       }
 
+    }
+
+    public function __destruct()
+    {
+      mysqli_close($this->connection);
     }
   }
