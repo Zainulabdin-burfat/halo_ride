@@ -31,7 +31,12 @@
 
       if ($this->result->num_rows) {
         $_SESSION['user'] = mysqli_fetch_assoc($this->result);
-        header("location:home.php?msg=Logged In Successfully ..!");
+
+        if ($_SESSION['user']['role_id'] == 1) {
+          header("location:home.php?msg=Logged In Successfully ..!");
+        }elseif($_SESSION['user']['role_id'] == 2){
+          header("location:home.php?msg=Logged In Successfully ..!");
+        }
         exit;
       }else{
         header("location:index.php?msg=Invalid Email/Password");

@@ -1,9 +1,9 @@
 <?php
-  session_start();
+  // session_start();
 
-  if (!isset($_SESSION['user'])) {
-    header("location:index.php?msg=Login First");
-  }
+  // if (!isset($_SESSION['user'])) {
+  //   header("location:index.php?msg=Login First");
+  // }
   
   include_once 'include/header.php';
 

@@ -41,6 +41,7 @@ $database = new Database();
                     <table class="table table-head-fixed text-nowrap table-striped">
                       <thead>
                         <tr>
+                          <th>Photo</th>
                           <th>Captain Name</th>
                           <th>Email</th>
                           <th>Phone Number</th>
@@ -59,6 +60,7 @@ $database = new Database();
                           while ($captain = mysqli_fetch_assoc($result)) {
                         ?>
                             <tr>
+                              <td> <img src="<?php echo $captain['image']; ?>" width="30" alt="Photo"></td>
                               <td><?php echo $captain['full_name']; ?></td>
                               <td><?php echo $captain['email']; ?></td>
                               <td><?php echo $captain['phone_number']; ?></td>
