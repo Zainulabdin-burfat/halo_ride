@@ -1,5 +1,5 @@
 <?php
-
+  session_start();
   class Database{
     
     public $hostname    = 'localhost';
@@ -25,13 +25,12 @@
     }
 
     public function login($request){
-      
       $this->query = "SELECT * FROM users WHERE `email`='".$request['email']."' AND `password`='".$request['password']."' LIMIT 1 ";
       $this->result = mysqli_query($this->connection,$this->query);
-
+      
       if ($this->result->num_rows) {
         $_SESSION['user'] = mysqli_fetch_assoc($this->result);
-
+        
         if ($_SESSION['user']['role_id'] == 1) {
           header("location:home.php?msg=Logged In Successfully ..!");
           exit;

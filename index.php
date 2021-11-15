@@ -1,7 +1,22 @@
 <?php 
-  session_start();
-  require_once 'require/database.php';
-  $db = new Database();
+
+require_once 'require/database.php';
+$db = new Database();
+
+if (isset($_SESSION['user'])) {
+  if ($_SESSION['user']['role_id'] == 1) {
+    header("location:home.php");
+    exit;
+  }
+  else if ($_SESSION['user']['role_id'] == 2) {
+    header("location:driver_home.php");
+    exit;
+  }
+  else if ($_SESSION['user']['role_id'] == 3) {
+    header("location:client_home.php");
+    exit;
+  }
+}
 
 ?>
 <!DOCTYPE html>
@@ -9,7 +24,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Farmer Connection</title>
+  <title>Halo Ride</title>
 
   <link rel="stylesheet" type="text/css" href="css/w3.css">
   <!-- Google Font: Source Sans Pro -->
@@ -25,8 +40,6 @@
 
 <?php
   
-  // $db->_select("user_role");
-
   if (isset($_GET['msg']) && $_GET['msg'] == "logout") {
     unset($_SESSION['user']);
     session_destroy();
@@ -69,7 +82,8 @@
         </div>
         
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <input type="submit" class="btn btn-primary btn-block" value="Sign In" />
+            <!-- <button type="submit" class="btn btn-primary btn-block">Sign In</button> -->
           </div>
           <!-- /.col -->
         </div>

@@ -1,14 +1,14 @@
 <?php
-  // session_start();
+session_start();
 
-  // if (!isset($_SESSION['user'])) {
-  //   header("location:index.php?msg=Login First");
-  // }
-  
+if (!isset($_SESSION['user'])) {
+  header("location:index.php?msg=Login First");
+} else {
+
   include_once 'include/header.php';
 
 ?>
-  
+
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -82,11 +82,12 @@
             </div>
           </div>
         </div>
-      
+
       </div>
     </section>
-  </div>  
-  
+  </div>
+
 <?php
   include_once 'include/footer.php';
+}
 ?>
