@@ -24,6 +24,11 @@
         }
     }
 
+    public function change_status($id, $status){
+      $this->query = "UPDATE users SET `status`=$status WHERE user_id=$id";
+      return $this->result = mysqli_query($this->connection,$this->query);
+    }
+
     public function login($request){
       $this->query = "SELECT * FROM users WHERE `email`='".$request['email']."' AND `password`='".$request['password']."' LIMIT 1 ";
       $this->result = mysqli_query($this->connection,$this->query);

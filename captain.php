@@ -1,13 +1,31 @@
 <?php
 
-include_once 'include/header.php';
+  require_once 'require/database.php';
+  $database = new Database();
 
-require_once 'require/database.php';
-
-$database = new Database();
-
+  include_once 'include/header.php';
 ?>
+<script>
+  function change_status(id,status) {
 
+    var ajax;
+    if (window.XMLHttpRequest) {
+      ajax = new XMLHttpRequest();
+    }else{
+      ajax = new ActiveXObject("Microsot.XMLHTTP");
+    }
+
+    ajax.onreadystatechange = function(){
+
+      if (ajax.status == 200 && ajax.readyState == 4) {
+        alert(ajax.responseText);
+        location.reload();
+      }
+    }
+    ajax.open("GET","ajax_process.php?action=update_status&id="+id+"&status="+status);
+    ajax.send();
+  }
+</script>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -65,7 +83,24 @@ $database = new Database();
                               <td><?php echo $captain['email']; ?></td>
                               <td><?php echo $captain['phone_number']; ?></td>
                               <td><?php echo $captain['cnic']; ?></td>
-                              <td><?php echo $captain['status']; ?></td>
+                              <td>
+                                <select name="status" id="status" onchange="change_status(<?php echo $captain['user_id'];?>,this.value)">
+                                  <?php
+                                    if ($captain['status'] == 0) {
+                                      ?>
+                                      <option selected value="0">Inactice</option>
+                                      <option value="1">Actice</option>
+                                      <?php
+                                    }
+                                    if ($captain['status'] == 1) {
+                                      ?>
+                                      <option value="0">Inactice</option>
+                                      <option selected value="1">Actice</option>
+                                      <?php
+                                    }
+                                  ?>
+                                </select>
+                              </td>
 
                               <td><a href="<?php echo $captain['user_id']; ?>">Edit</a></td>
                             </tr>
