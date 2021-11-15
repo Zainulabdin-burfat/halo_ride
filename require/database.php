@@ -20,7 +20,7 @@
           $this->database
         );
         if (mysqli_connect_errno()) {
-          echo "Error While Connecting to the Database";
+          die("Error While Connecting to the Database");
         }
     }
 
@@ -34,10 +34,11 @@
 
         if ($_SESSION['user']['role_id'] == 1) {
           header("location:home.php?msg=Logged In Successfully ..!");
+          exit;
         }elseif($_SESSION['user']['role_id'] == 2){
           header("location:home.php?msg=Logged In Successfully ..!");
+          exit;
         }
-        exit;
       }else{
         header("location:index.php?msg=Invalid Email/Password");
         exit;
@@ -68,7 +69,7 @@
       if (isset($image['image']['name'])) {
                   
         $FileName = "images/".$image['image']['name'];
-        $TmpName = $image['image']['tmp_name'];
+        $TmpName  = $image['image']['tmp_name'];
         
         if (move_uploaded_file($TmpName,$FileName)) {
           $msg .= 'Image Uploaded</br>';
