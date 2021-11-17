@@ -62,6 +62,18 @@
         return false;
       }
     }
+
+    public function getRoutes()
+    {
+      $this->query = "SELECT F.from 'From',T.to 'To' FROM routes AS R";
+      $this->result = mysqli_query($this->connection,$this->query);
+
+      if ($this->result->num_rows) {
+        return $this->result;
+      }else{
+        return false;
+      }
+    }
     
     public function getVehicles()
     {
