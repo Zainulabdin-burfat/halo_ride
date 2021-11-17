@@ -11,12 +11,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Captain</h1>
+          <h1 class="m-0">Vehicle</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Captain</li>
+            <li class="breadcrumb-item active">Vehicle</li>
           </ol>
         </div>
       </div>
@@ -33,17 +33,17 @@
 
               <?php
               if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'show') {
-              ?>
+                ?>
                 <div class="card">
                   <div class="card-body table-responsive p-0" style="height: 300px;">
                     <table class="table table-head-fixed text-nowrap table-striped">
                       <thead>
                         <tr>
                           <th>Photo</th>
-                          <th>Captain Name</th>
-                          <th>Email</th>
-                          <th>Phone Number</th>
-                          <th>CNIC Number</th>
+                          <th>Registration#</th>
+                          <th>Type</th>
+                          <th>Wheels</th>
+                          <th>Seats</th>
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
@@ -51,28 +51,28 @@
                       <tbody>
                         <?php
 
-                        $result = $database->getCaptains();
+                        $result = $database->getVehicles();
 
                         if ($result != false) {
 
-                          while ($captain = mysqli_fetch_assoc($result)) {
+                          while ($vehicle = mysqli_fetch_assoc($result)) {
                         ?>
                             <tr>
-                              <td> <img src="<?php echo $captain['image']; ?>" width="30" alt="Photo"></td>
-                              <td><?php echo $captain['full_name']; ?></td>
-                              <td><?php echo $captain['email']; ?></td>
-                              <td><?php echo $captain['phone_number']; ?></td>
-                              <td><?php echo $captain['cnic']; ?></td>
+                              <td> <img src="<?php echo $vehicle['image']; ?>" width="30" alt="Photo"></td>
+                              <td><?php echo $vehicle['registration_number']; ?></td>
+                              <td><?php echo $vehicle['type']; ?></td>
+                              <td><?php echo $vehicle['wheels']; ?></td>
+                              <td><?php echo $vehicle['seats']; ?></td>
                               <td>
-                                <select class="form-control" name="status" id="status" onchange="change_status(<?php echo $captain['user_id'];?>,this.value,'users')">
+                                <select class="form-control" name="status" id="status" onchange="change_status(<?php echo $vehicle['vehicle_id'];?>,this.value,'vehicles')">
                                   <?php
-                                    if ($captain['status'] == 0) {
+                                    if ($vehicle['status'] == 0) {
                                       ?>
                                       <option selected value="0">Inactice</option>
                                       <option value="1">Actice</option>
                                       <?php
                                     }
-                                    if ($captain['status'] == 1) {
+                                    if ($vehicle['status'] == 1) {
                                       ?>
                                       <option value="0">Inactice</option>
                                       <option selected value="1">Actice</option>
@@ -82,7 +82,7 @@
                                 </select>
                               </td>
 
-                              <td><a href="<?php echo $captain['user_id']; ?>">Edit</a></td>
+                              <td><a href="<?php echo $vehicle['vehicle_id']; ?>">Edit</a></td>
                             </tr>
                         <?php
                           }
@@ -95,36 +95,31 @@
                   </div>
                 </div>
 
-              <?php
+                <?php
               }
               if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'add') {
               ?>
-
                 <div class="card card-primary">
                   <div class="card-header">
-                    <h3 class="card-title">Add Captain</h3>
+                    <h3 class="card-title">Add Vehicle</h3>
                   </div>
-                  <form action="captain.php?action=addcaptain" method="POST" enctype="multipart/form-data">
+                  <form action="vehicle.php?action=addVehicle" method="POST" enctype="multipart/form-data">
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="fullname">Full Name</label>
-                        <input type="text" class="form-control" name="full_name" id="fullname" placeholder="Full Name">
+                        <label for="registration_number">Registration Number</label>
+                        <input type="text" class="form-control" name="registration_number" id="registration_number" placeholder="Registration Number">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter email">
+                        <label for="type">Type</label>
+                        <input type="text" class="form-control" name="type" id="type" placeholder="Type">
                       </div>
                       <div class="form-group">
-                        <label for="phonenumber">Phone Number</label>
-                        <input type="text" class="form-control" name="phone_number" id="phonenumber" placeholder="Phone Number">
+                        <label for="wheels">Wheels</label>
+                        <input type="number" class="form-control" name="wheels" id="wheels" placeholder="Wheels">
                       </div>
                       <div class="form-group">
-                        <label for="CNICnumber">CNIC Number</label>
-                        <input type="text" name="cnic" class="form-control" id="CNICnumber" placeholder="CNIC Number">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="seats">Seats</label>
+                        <input type="number" class="form-control" name="seats" id="seats" placeholder="Seats">
                       </div>
                       <div class="form-group">
                         <label for="image">Image</label>
@@ -148,14 +143,14 @@
               <?php
               }
 
-              if (isset($_GET['action']) && $_GET['action'] == 'addcaptain') {
-
-                $result = $database->addCaptain($_POST,$_FILES);
+              if (isset($_GET['action']) && $_GET['action'] == 'addVehicle')
+              {
+                $result = $database->addVehicle($_POST,$_FILES);
 
                 if ($result) {
-                  echo "Captain Added Successfully ..!";
+                  echo "vehicle Added Successfully ..!";
                 }else{
-                  echo "Captain Not Added Try Again Later.";
+                  echo "vehicle Not Added Try Again Later.";
                 }
               }
               ?>
