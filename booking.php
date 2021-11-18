@@ -44,11 +44,14 @@ include_once 'include/header.php';
 								<div class="form-group">
 									<label for="exampleFormControlSelect1">Select Route</label>
 									<select class="form-control" id="exampleFormControlSelect1">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+										<option>Select Route</option>
+										<?php
+											while ($route = mysqli_fetch_assoc($result)) {
+												?>
+													<option value="<?php echo $route['route_id'];?>"><?php echo $route['Route'];?></option>
+												<?php
+											}
+										?>
 									</select>
 								</div>
 							

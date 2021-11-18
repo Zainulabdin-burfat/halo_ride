@@ -65,7 +65,16 @@
 
     public function getRoutes()
     {
-      $this->query = "SELECT F.from 'From',T.to 'To' FROM routes AS R";
+      $this->query = "SELECT
+                      R.route_id,
+                      CONCAT(F.`city_name`,' - ',T.`city_name`) AS 'Route'
+                      FROM
+                      `routes` AS R
+                      INNER JOIN `city` AS F
+                      ON F.`city_id` = R.`from`
+                      INNER JOIN `city` AS T
+                      ON T.`city_id` = R.`to`";
+
       $this->result = mysqli_query($this->connection,$this->query);
 
       if ($this->result->num_rows) {
