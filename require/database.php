@@ -83,6 +83,38 @@
         return false;
       }
     }
+
+    public function getBookings($route_id)
+    {
+      $this->query = "SELECT
+                      B.booking_id,
+                      CONCAT(V.`type`,' - ',V.`registration_number`) AS 'Vehicle',
+                      CONCAT(U.`full_name`,' - ',U.`phone_number`) AS 'Captain',
+                      v.`seats` AS 'TotalSeats',
+                      B.`avaiable_seats` AS 'AvailableSeats',
+                      CONCAT(F.`city_name`,' - ',T.`city_name`) AS 'Route'
+                      FROM
+                      `bookings` AS B
+                      INNER JOIN `users` AS U
+                        ON U.`user_id` = B.`captain_id`
+                      INNER JOIN `vehicles` AS V
+                        ON V.`vehicle_id` = B.`vehicle_id`
+                      INNER JOIN `routes` AS R
+                        ON R.`route_id` = B.`route_id`
+                      INNER JOIN `city` AS F
+                        ON F.`city_id` = R.`from`
+                      INNER JOIN `city` AS T
+                        ON T.`city_id` = R.`to`
+                      WHERE R.route_id=$route_id";
+
+      $this->result = mysqli_query($this->connection,$this->query);
+
+      if ($this->result->num_rows) {
+        return $this->result;
+      }else{
+        return false;
+      }
+    }
     
     public function getVehicles()
     {
@@ -127,6 +159,20 @@
         return true;
       }else{
         $msg .= 'Vehicle Not Added</br>';
+        return false;
+      }
+
+    }
+    public function addBooking($booking_id)
+    {
+
+      $this->query = "INSERT INTO `user_seat_booking`(user_id,booking_id) VALUES('".$_SESSION['user']['user_id']."',$booking_id)";
+      $this->result = mysqli_query($this->connection,$this->query);
+
+      if ($this->result) {
+        return true;
+        
+      }else{
         return false;
       }
 
