@@ -144,7 +144,8 @@ include_once 'include/header.php';
 			?>
 				<script>
 					alert("Booking Added Successfully ..!");
-					</script>
+					window.location.href = window.location.origin+"/halo_ride/booking.php?action=show";
+				</script>
 			<?php
 			
 		}
@@ -153,6 +154,7 @@ include_once 'include/header.php';
 			?>
 				<script>
 					alert("Booking Not Added Please Try Again Later");
+					window.location.href = window.location.origin+"/halo_ride/booking.php?action=show";
 				</script>
 			<?php
 		}
