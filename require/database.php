@@ -105,7 +105,8 @@
                         ON F.`city_id` = R.`from`
                       INNER JOIN `city` AS T
                         ON T.`city_id` = R.`to`
-                      WHERE R.route_id=$route_id";
+                      WHERE B.`avaiable_seats`>0 
+                      AND R.route_id=$route_id";
 
       $this->result = mysqli_query($this->connection,$this->query);
 
@@ -170,6 +171,8 @@
       $this->result = mysqli_query($this->connection,$this->query);
 
       if ($this->result) {
+        $this->query = "UPDATE `bookings` SET `avaiable_seats` = (avaiable_seats-1) WHERE booking_id = $booking_id";
+        $this->result = mysqli_query($this->connection,$this->query);
         return true;
         
       }else{
