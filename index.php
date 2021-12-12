@@ -91,10 +91,10 @@ if (isset($_SESSION['user'])) {
 
      
 
-      <p class="mb-1">
+      <p class="ml-4">
         <a href="forgot_password.php">I forgot my password</a>
       </p>
-      <p class="mb-0">
+      <p class="ml-4">
         <a href="register.php" class="text-center">Register yourself..!</a>
       </p>
     </div>

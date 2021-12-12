@@ -18,9 +18,9 @@
     $result = $database->getBookings($_REQUEST['id']);
     ?>
       <div class="form-group">
-        <label for="route">Select Booking</label>
+        <label for="route">Select Ride</label>
         <select name="booking_id" class="form-control" id="route">
-          <option>Select Route</option>
+          <option>Select Ride</option>
           <?php
           while ($booking = mysqli_fetch_assoc($result)) {
           ?>

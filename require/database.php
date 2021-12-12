@@ -41,8 +41,8 @@
         if ($_SESSION['user']['role_id'] == 1) {
           header("location:home.php?msg=Logged In Successfully ..!");
           exit;
-        }elseif($_SESSION['user']['role_id'] == 2){
-          header("location:home.php?msg=Logged In Successfully ..!");
+        }elseif($_SESSION['user']['role_id'] == 3){
+          header("location:booking.php?action=show");
           exit;
         }
       }else{
