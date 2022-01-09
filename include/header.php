@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="sidebar-open">
 <div class="wrapper">
@@ -186,7 +187,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="booking.php" class="nav-link">
+            <a href="booking.php?action=show" class="nav-link">
               <i class="nav-icon fas fa-car"></i>
               <p>Book a Ride</p>
             </a>
@@ -256,13 +257,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.php" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Show Route</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.php" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Route</p>
                 </a>
@@ -274,4 +275,3 @@
       </nav>
     </div>
   </aside>
-
