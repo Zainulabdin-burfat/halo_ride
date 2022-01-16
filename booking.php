@@ -16,7 +16,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'show') {
 	<div class="row">
 		<div class="col-sm-12">
 
-			<div class="container">
+			<!-- <div class="container">
 				<div class="row">
 					<div class="col-12">
 						<table class="table table-bordered">
@@ -67,7 +67,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'show') {
 						</table>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<div id="booking" class="section">
 				<div class="section-center">
 					<div class="container">
@@ -116,8 +116,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'add') {
 	if ($database->addBooking($_REQUEST['booking_id'])) {
 	?>
 		<script>
-			// alert("Booking Added Successfully ..!");
-			swal("Success", "Booking Added Successfully ..!", "success");
+			alert("Booking Added Successfully ..!");
+			// swal("Success", "Booking Added Successfully ..!", "success");
 			window.location.href = window.location.origin + "/halo_ride/booking.php?action=show";
 		</script>
 	<?php

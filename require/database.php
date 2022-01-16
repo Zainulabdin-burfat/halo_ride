@@ -39,7 +39,7 @@
         $_SESSION['user'] = mysqli_fetch_assoc($this->result);
         
         if ($_SESSION['user']['role_id'] == 1) {
-          header("location:home.php?msg=Logged In Successfully ..!");
+          header("location:home_admin.php?msg=Logged In Successfully ..!");
           exit;
         }elseif($_SESSION['user']['role_id'] == 3){
           header("location:booking.php?action=show");

@@ -31,10 +31,16 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="landing_page.php" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="booking.php?action=show" class="nav-link">Book a Ride</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="contact-us.php" class="nav-link">Contact Us</a>
       </li>
     </ul>
 
@@ -160,7 +166,10 @@
       </li>
     </ul>
   </nav>
-
+<?php
+  // session_start();
+  if ( isset($_SESSION['user']) && $_SESSION['user']['role_id'] == 1 ) {
+?>
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="index.php" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -275,3 +284,4 @@
       </nav>
     </div>
   </aside>
+  <?php } ?>
